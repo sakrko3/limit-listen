@@ -2,6 +2,7 @@ import UpdateInventoryModal from './modals/UpdateInventoryModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { getProducts } from '../features/products/productActions'
+import Spinner from './Spinner'
 
 const ProductTable = () => {
   const { user, access, loading } = useSelector((state) => state.user)
@@ -42,31 +43,35 @@ const ProductTable = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr
-              className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'
-              key={product.id}
-            >
-              <th
-                scope='row'
-                className='py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white'
+          {!loading ? (
+            products.map((product) => (
+              <tr
+                className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'
+                key={product.id}
               >
-                {product.name}
-              </th>
-              <td className='py-4 px-6'>{product.price}</td>
-              <td className='py-4 px-6'>{product.description}</td>
-              <td className='py-4 px-6'>{product.inventory}</td>
-              {user.role != 3 ? (
-                <>
-                  <td className='py-4 px-6'>
-                    <UpdateInventoryModal id={product.id} />
-                  </td>
-                </>
-              ) : (
-                ''
-              )}
-            </tr>
-          ))}
+                <th
+                  scope='row'
+                  className='py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white'
+                >
+                  {product.name}
+                </th>
+                <td className='py-4 px-6'>{product.price}</td>
+                <td className='py-4 px-6'>{product.description}</td>
+                <td className='py-4 px-6'>{product.inventory}</td>
+                {user.role != 3 ? (
+                  <>
+                    <td className='py-4 px-6'>
+                      <UpdateInventoryModal id={product.id} />
+                    </td>
+                  </>
+                ) : (
+                  ''
+                )}
+              </tr>
+            ))
+          ) : (
+            <Spinner />
+          )}
         </tbody>
       </table>
     </div>
