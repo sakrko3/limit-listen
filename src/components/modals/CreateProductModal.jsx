@@ -13,7 +13,9 @@ const CreateProductModal = () => {
   const dispatch = useDispatch()
   const submitForm = (data) => {
     dispatch(createProduct(data))
-    toggleModal(!modal)
+    if (!loading) {
+      toggleModal(!modal)
+    }
   }
   return (
     <div>

@@ -14,7 +14,9 @@ const UpdateInventoryModal = ({ id }) => {
   const submitInventory = (data) => {
     data['id'] = id
     dispatch(updateInventory(data))
-    toggleModal(!modal)
+    if (!loading) {
+      toggleModal(!modal)
+    }
   }
   return (
     <div>
