@@ -27,6 +27,7 @@ Following steps would help you to run the web app locally:
 - Open Terminal and use following commands
 - `git clone https://github.com/sakrko3/limit-listen.git`
 - `cd limit-listen`
+- `npm install`
 - `npm run dev`
 
 ## Features
