@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../features/users/userActions'
+import Spinner from '../components/Spinner'
 
 const Register = () => {
   const { success, loading, user } = useSelector((state) => state.user)
@@ -131,7 +132,13 @@ const Register = () => {
             className='w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
             disabled={loading}
           >
-            Create account
+            {loading ? (
+              <>
+                <Spinner />
+              </>
+            ) : (
+              'Create account'
+            )}
           </button>
           <div className='text-sm font-medium text-gray-500 dark:text-gray-300'>
             Registered?{' '}
